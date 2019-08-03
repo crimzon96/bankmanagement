@@ -1,9 +1,11 @@
-from django.db import models
+from datetime import datetime
+
 from django.contrib.auth import get_user_model
-from django_extensions.db.models import TimeStampedModel
+from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from datetime import datetime
+from django_extensions.db.models import TimeStampedModel
+
 User = get_user_model()
 
 # Create your models here.
@@ -11,7 +13,7 @@ User = get_user_model()
 
 class Bankaccount(TimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    balance = models.IntegerField()
+    balance = models.IntegerField(default=0)
 
     @property
     def check_balance(self):
